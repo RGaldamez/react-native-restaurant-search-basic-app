@@ -2,11 +2,20 @@ import React from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const SearchBar = () => {
+const SearchBar = ({term, onTermChange, onTermSubmit}) => {
   return (
     <View style={styles.searchBar}>
       <Icon name="search1" style={styles.searchIconStyle} />
-      <TextInput placeholder="Search" style={styles.searchText} />
+      <TextInput
+        value={term}
+        onChangeText={onTermChange}
+        placeholder="Search"
+        style={styles.searchText}
+        autoCapitalize="none"
+        autoCorrect={false}
+        onEndEditing={onTermSubmit}
+        // onEndEditing={() => console.log('submitted')}
+      />
     </View>
   );
 };

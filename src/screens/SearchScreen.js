@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import SearchBar from '../components/SearchBar';
 import yelp from '../api/yelp';
 import useResults from '../hooks/useResults';
@@ -19,14 +19,14 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.layout}>
-      <View>
-        <SearchBar
-          term={term}
-          onTermChange={setTerm}
-          onTermSubmit={() => searchApi(term)}
-        />
-        {errorMessage ? <Text>{errorMessage}</Text> : null}
-        <Text>We have found {results.length} results</Text>
+      <SearchBar
+        term={term}
+        onTermChange={setTerm}
+        onTermSubmit={() => searchApi(term)}
+      />
+      {errorMessage ? <Text>{errorMessage}</Text> : null}
+      <Text>We have found {results.length} results</Text>
+      <ScrollView>
         <ResultsList
           results={filterResultsByPrice('$')}
           title="Cost Effective"
@@ -36,24 +36,25 @@ const SearchScreen = () => {
           results={filterResultsByPrice('$$$')}
           title="Big Spender"
         />
-      </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   layout: {
+    flex: 1,
     // width: '100%',
     // height: '100%',
   },
-  restaurantList: {
-    flex: 3,
-    borderTopWidth: 1,
-    borderColor: 'purple',
-  },
-  searchBar: {
-    flex: 1,
-  },
+  // restaurantList: {
+  //   flex: 3,
+  //   borderTopWidth: 1,
+  //   borderColor: 'purple',
+  // },
+  // searchBar: {
+  //   flex: 1,
+  // },
 });
 
 export default SearchScreen;

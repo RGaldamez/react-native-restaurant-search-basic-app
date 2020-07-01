@@ -5,7 +5,7 @@ import yelp from '../api/yelp';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
-const SearchScreen = ({navigation}) => {
+const SearchScreen = () => {
   // console.log('hi there');
   const [term, setTerm] = useState('');
   const [searchApi, results, errorMessage] = useResults();
@@ -30,17 +30,11 @@ const SearchScreen = ({navigation}) => {
         <ResultsList
           results={filterResultsByPrice('$')}
           title="Cost Effective"
-          navigation={navigation}
         />
-        <ResultsList
-          results={filterResultsByPrice('$$')}
-          title="Bit Pricier"
-          navigation={navigation}
-        />
+        <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
         <ResultsList
           results={filterResultsByPrice('$$$')}
           title="Big Spender"
-          navigation={navigation}
         />
       </ScrollView>
     </View>
